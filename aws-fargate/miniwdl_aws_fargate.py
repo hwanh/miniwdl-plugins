@@ -109,7 +109,7 @@ class AWSFargateContainer(TaskContainer):
         if os.stat(self.host_dir).st_dev != os.stat(self.efs_mountpoint).st_dev:
             raise RuntimeError(f"miniwdl run directory is outside EFS mountpoint {self.efs_mountpoint}")
 
-        for host_path, container_path in self.input_file_map.items():
+        for host_path, container_path in self.input_path_map.items():
             subd = os.path.basename(os.path.dirname(container_path))
             real_host_path = os.path.realpath(host_path)
             host_work_path = os.path.join(self.host_dir, "work/_miniwdl_inputs", subd, os.path.basename(real_host_path))
